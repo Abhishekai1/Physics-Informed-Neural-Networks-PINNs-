@@ -39,12 +39,11 @@ with:
 ## 📊 Results Overview
 
 ### Predicted vs Analytic Solution at \( t = 0.5 \)
-| PINN (Fourier) | Analytic Solution | Baseline PINN |
-|---|---|---|
-| ![PINN](assets/pinn.png) | ![Analytic](assets/analytic.png) | ![Baseline](assets/baseline.png) |
+<img width="1479" height="396" alt="image" src="https://github.com/user-attachments/assets/accd78d7-3568-4d01-957d-39149b24db7e" />
+
 
 ### PDE Residual Map
-![Residual Map]<img width="1188" height="390" alt="image" src="https://github.com/user-attachments/assets/0be9f30e-8d48-4445-84a7-213fb00252ac" />
+<img width="1188" height="390" alt="image" src="https://github.com/user-attachments/assets/0be9f30e-8d48-4445-84a7-213fb00252ac" />
 
 ---
 
