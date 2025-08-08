@@ -4,37 +4,85 @@ This repository contains a **research-grade implementation** of a Physics-Inform
 
 ---
 
-## 📊 Results Overview
+## 📐 Problem Definition
 
-### Model Comparisons at \( t = 0.5 \)
+We solve the PDE:
 
-| Baseline PINN | Analytic Solution | PINN (Fourier Features) |
-|---|---|---|
-| ![Baseline](assets/baseline_pinn.png) | ![Analytic](assets/analytic.png) | ![Fourier](assets/fourier_pinn.png) |
-
-The **Fourier-enhanced PINN** produces richer high-frequency representations, while the baseline suffers from spectral bias. The analytic solution serves as the ground truth for comparison.
+\[
+\frac{\partial u}{\partial t} = \alpha \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} \right)
+\]
+with:
+- **Domain:** \( x, y \in [0,1], t \in [0,1] \)
+- **Initial Condition:** \( u(x,y,0) = \sin(\pi x) \sin(\pi y) \)
+- **Boundary Condition:** \( u = 0 \) on all edges
+- **Analytic Solution:** \( u(x,y,t) = e^{-2\pi^2\alpha t} \sin(\pi x) \sin(\pi y) \)
 
 ---
 
-### PDE Residual Analysis
+## 🧠 Key Features
 
-| Residual Map \( r(x,y,t=0.5) \) | Residual Distribution |
-|---|---|
-| ![Residual Map](assets/residual_map.png) | ![Residual Histogram](assets/residual_hist.png) |
+- **Fourier Feature Encoding** to mitigate spectral bias  
+- **Hybrid Optimization**: Adam → L-BFGS (Wolfe line search)  
+- **Adaptive Loss Reweighting** for balanced PDE/IC/BC/energy terms  
+- **Energy-Decay Penalty** to enforce physical constraints  
+- **Curriculum Sampling** focusing on challenging regimes early  
+- **Extensive Visualization**:
+  - Training loss curves
+  - PDE residual maps & histograms
+  - 3D surface plots
+  - Profiles vs analytic solution
+  - Error vs time curves
+  - Animated time evolution (GIF)
 
-Residual visualization helps identify regions where the PDE constraint is harder to satisfy, guiding further refinement strategies.
+---
+
+## 📊 Results Overview
+
+### Predicted vs Analytic Solution at \( t = 0.5 \)
+| PINN (Fourier) | Analytic Solution | Baseline PINN |
+|---|---|---|
+| ![PINN](assets/pinn.png) | ![Analytic](assets/analytic.png) | ![Baseline](assets/baseline.png) |
+
+### PDE Residual Map
+![Residual Map]<img width="1188" height="390" alt="image" src="https://github.com/user-attachments/assets/0be9f30e-8d48-4445-84a7-213fb00252ac" />
 
 ---
 
 ## 📖 Research Impact
 
-This project demonstrates a **bridge between theoretical PINN research and applied scientific computing**. By integrating:
-- Fourier features for spectral bias reduction
-- Adaptive loss reweighting
-- Physical priors (energy decay)
-- Advanced optimizers (Adam → L-BFGS)
+This project showcases how **domain-specific physics can be integrated directly into neural network training** for robust, interpretable, and data-efficient solutions to PDEs.  
+Potential extensions include:
+- Inverse problem solving (parameter estimation from sparse observations)  
+- Multi-physics PINNs for coupled systems  
+- Using PINNs to accelerate traditional finite-element or finite-difference solvers  
+- Applying advanced sampling strategies to improve generalization in PDE learning  
 
-…it provides a **robust and interpretable framework** for solving PDEs, easily extendable to:
-- Inverse problems
-- Multi-physics coupling
-- Acceleration of traditional solvers
+By combining **spectral bias mitigation, curriculum learning, hybrid optimization, and physical priors**, this implementation bridges the gap between theoretical PINN research and real-world scientific computing.
+
+---
+
+## 🛠 Tech Stack
+- `PyTorch`
+- `NumPy`
+- `Matplotlib`
+- `ImageIO`
+- `TQDM`
+
+---
+
+## 📌 Applications
+- Scientific machine learning
+- Computational fluid dynamics
+- Thermal simulations
+- Materials science
+- PDE-constrained optimization
+- Inverse problem solving
+
+---
+
+## 📬 Author
+**Abhishek Yadav**  
+Passionate about AI for physics, scientific ML, and PDE-constrained deep learning.  
+Let’s connect on [LinkedIn](https://www.linkedin.com/).
+
+---
